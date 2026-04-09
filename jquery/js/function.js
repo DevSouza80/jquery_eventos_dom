@@ -1,47 +1,48 @@
-$(function(){
+// Executa quando o documento estiver pronto
+$(function () {
 
-    validarCliqueHover();
-    validarFormulario();
+    // Variável para controlar o timeout
+    var timer;
 
-    // =========================
-    // EVENTOS DE CLIQUE E HOVER
-    // =========================
-    function validarCliqueHover(){
+    // Evento de SCROLL
+    $(window).scroll(function () {
+        // Executa quando o usuário rola a página
+        console.log("Scroll detectado!");
+    });
 
-        // Evento de clique
-        $('.artigo1').click(function(){
-            $('.artigo2').css('background-color', 'purple');
-        });
+    // Evento de RESIZE
+    $(window).resize(function () {
+        console.log("Tela redimensionada!");
 
-        // Evento hover (entra e sai)
-        $('.artigo1').hover(function(){
-            $('.artigo2').css('background-color', 'red');
-        }, function(){
-            $('.artigo2').css('background-color', 'rgb(100,100,100)');
-        });
+        // Limpa o timeout anterior (evita múltiplos disparos)
+        clearTimeout(timer);
 
-    }
+        // Cria um novo timeout
+        timer = setTimeout(function () {
+            // Redireciona após 1 segundo
+            location.href = "http://localhost/Curso%20WebMaster/JQuery/";
+        }, 1000);
+    });
 
-    // =========================
-    // EVENTOS DE FORMULÁRIO
-    // =========================
-    function validarFormulario(){
+    // Evento de clique em LINKS
+    $('a').click(function (e) {
+        // Impede comportamento padrão do link
+        // e.preventDefault();
 
-        // Quando o campo recebe foco
-        $('textarea').focus(function(){
-            console.log("Textarea em foco");
-        })
+        // Outra forma de impedir comportamento padrão
+        // return false;
+    });
 
-        // Quando perde o foco
-        .blur(function(){
-            console.log("Textarea perdeu o foco");
-        });
+    // Evento de clique na DIV .box
+    $('.box').click(function (e) {
+        // Impede que o clique "suba" para o body
+        e.stopPropagation();
+    });
 
-        // Quando o select muda
-        $('select').change(function(){
-            console.log("Meu select foi alterado!");
-        });
-
-    }
+    // Evento de clique no BODY
+    $('body').click(function () {
+        // Altera a cor da .box
+        $('.box').css('background-color', 'green');
+    });
 
 });
